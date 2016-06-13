@@ -5,7 +5,7 @@ class User extends Component {
     
   }
 
-  render() {
+  render () {
     const { id, name } = this.props;
 
     return (

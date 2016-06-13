@@ -2,18 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userAction from '../../actions/user';
-import axios from 'axios';
+
 import { UserList } from '../../components';
 
 class UserListApp extends Component {
   
   componentWillMount() {
     const { actions } = this.props;
-    axios.get('/mock/users.json').then(function (ret) {
-      if(ret.status === 200) {
-        actions.setUser(ret.data);
-      }
-    });
+    actions.getUsers();
   }
 
   render() {
@@ -33,7 +29,8 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  actions: bindActionCreators(userAction, dispatch)
+  actions: bindActionCreators(userAction, dispatch),
+  dispatch: dispatch
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserListApp);
